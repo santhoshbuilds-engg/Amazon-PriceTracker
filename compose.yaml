@@ -1,0 +1,14 @@
+services:
+  tracker:
+    build: .
+    init: true
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - price-data:/app/data
+      - ./products.json:/app/products.json:ro
+    shm_size: 512mb
+    security_opt:
+      - no-new-privileges:true
+volumes:
+  price-data:
